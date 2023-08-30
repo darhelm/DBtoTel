@@ -2,3 +2,5 @@
 x-ui.db
 settings.json
 __pycache__
+secret.txt
+.gitignore
