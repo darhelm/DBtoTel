@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from typing import Final
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
@@ -5,7 +7,8 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 
 from read_db import findEmail, findId
 
-with open("secrets.txt", "r", encoding="UTF-8") as f:
+
+with open("secret.txt", "r", encoding="UTF-8") as f:
     TOKEN = f.read().strip()
 
 BOT_USERNAME : Final = "@traffic_mp_bot"
@@ -35,8 +38,9 @@ async def id(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 traffic sum: {array[3]} GB
                 expiry time: {array[4]}
 """)
-    
-    await update.message.reply_text(" وجود ندارد Id")
+
+    elif type(array) != list:
+        await update.message.reply_text(" وجود ندارد Id")
 
 async def email(update: Update, context: ContextTypes.DEFAULT_TYPE):
     array = findEmail(context.args[0])
@@ -49,13 +53,14 @@ async def email(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 expiry time: {array[4]}
 """)
     
-    await update.message.reply_text(" وجود ندارد Email")
+    elif type(array) != list:
+        await update.message.reply_text(" وجود ندارد Email")
 
 
 if __name__ == "__main__":
     app = Application.builder().token(TOKEN).build()
 
-    # Commands
+    # Command Handler
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help))
     app.add_handler(CommandHandler("id", id))
