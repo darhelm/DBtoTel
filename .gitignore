@@ -1,3 +1,4 @@
 .env
 x-ui.db
 settings.json
+__pycache__

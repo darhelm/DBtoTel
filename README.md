@@ -1,1 +1,1 @@
-this project is meant to read a data base file,namely x-ui's local sqlite db file and extract contens such as used traffic and expiry date and display them on a telegram bot.
+this project is meant to read a data base file,namely x-ui's local sqlite db file and extract contens such as used traffic and expiry date and display them with a telegram bot.
