@@ -13,7 +13,7 @@ with open("secret.txt", "r", encoding="UTF-8") as f:
 
 BOT_USERNAME : Final = "@traffic_mp_bot"
 
-# commands
+# Commands
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("به ربات نمایش حجم Eternal VPN خوش امدید")
@@ -28,33 +28,43 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 """)
 
 async def id(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    id = context.args[0]
+    id: str = context.args[0]
     array = findId(id)
     if type(array) == list:
-        await update.message.reply_text(f"""
-                email: {array[0]}
-                download: {array[1]} GB
-                upload: {array[2]} GB
-                traffic sum: {array[3]} GB
-                expiry time: {array[4]}
+        if not array[5]:
+            await update.message.reply_text(f"""
+email: {array[0]}
+download: {array[1]} GB
+upload: {array[2]} GB
+traffic sum: {array[3]} GB
+expiry time: {array[4]}
 """)
 
-    elif type(array) != list:
-        await update.message.reply_text(" وجود ندارد Id")
+        await update.message.reply_text(f"""
+email: {array[0]}
+id: {array[5]}
+download: {array[1]} GB
+upload: {array[2]} GB
+traffic sum: {array[3]} GB
+expiry time: {array[4]}
+""")
+
+    await update.message.reply_text(f" وجود ندارد Id: {id}")
 
 async def email(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    email: str = context.args[0]
     array = findEmail(context.args[0])
     if type(array) == list:
         await update.message.reply_text(f"""
-                email: {array[0]}
-                download: {array[1]} GB
-                upload: {array[2]} GB
-                traffic sum: {array[3]} GB
-                expiry time: {array[4]}
+email: {array[0]}
+download: {array[1]} GB
+upload: {array[2]} GB
+traffic sum: {array[3]} GB
+expiry time: {array[4]}
 """)
     
-    elif type(array) != list:
-        await update.message.reply_text(" وجود ندارد Email")
+    elif type(array) == None:
+        await update.message.reply_text(f" وجود ندارد Email: {email}")
 
 
 if __name__ == "__main__":
