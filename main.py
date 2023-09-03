@@ -3,15 +3,17 @@
 from typing import Final
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
+from dotenv import dotenv_values
 
 
 from read_db import findEmail, findId
 
 
-with open("secret.txt", "r", encoding="UTF-8") as f:
-    TOKEN = f.read().strip()
+# Load the secrets to a variable as a dictionary "key, value pair"
 
-BOT_USERNAME : Final = "@traffic_mp_bot"
+SECRET = dotenv_values(".env")
+
+BOT_USERNAME : Final = SECRET["USR_NAME"]
 
 # Commands
 
@@ -68,7 +70,7 @@ expiry time: {array[4]}
 
 
 if __name__ == "__main__":
-    app = Application.builder().token(TOKEN).build()
+    app = Application.builder().token(SECRET["API_TOKEN"]).build()
 
     # Command Handler
     app.add_handler(CommandHandler("start", start))
