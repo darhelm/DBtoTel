@@ -65,7 +65,7 @@ traffic sum: {array[3]} GB
 expiry time: {array[4]}
 """)
     
-    elif type(array) == None:
+    elif type(array) != list:
         await update.message.reply_text(f" وجود ندارد Email: {email}")
 
 
