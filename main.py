@@ -32,17 +32,8 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def id(update: Update, context: ContextTypes.DEFAULT_TYPE):
     id: str = context.args[0]
     array = findId(id)
-    if type(array) == list:
-        if not array[5]:
-            await update.message.reply_text(f"""
-email: {array[0]}
-download: {array[1]} GB
-upload: {array[2]} GB
-traffic sum: {array[3]} GB
-expiry time: {array[4]}
-""")
 
-    elif array[5]:
+    if type(array) == list:
         await update.message.reply_text(f"""
 email: {array[0]}
 id: {array[5]}
@@ -51,8 +42,9 @@ upload: {array[2]} GB
 traffic sum: {array[3]} GB
 expiry time: {array[4]}
 """)
-
-    await update.message.reply_text(f" وجود ندارد Id: {id}")
+    
+    else:
+        await update.message.reply_text(f" وجود ندارد Id: {id}")
 
 async def email(update: Update, context: ContextTypes.DEFAULT_TYPE):
     email: str = context.args[0]
@@ -65,8 +57,8 @@ upload: {array[2]} GB
 traffic sum: {array[3]} GB
 expiry time: {array[4]}
 """)
-    
-    await update.message.reply_text(f" وجود ندارد Email: {email}")
+    elif type(array) != list:
+        await update.message.reply_text(f" وجود ندارد Email: {email}")
 
 
 if __name__ == "__main__":
