@@ -42,6 +42,7 @@ traffic sum: {array[3]} GB
 expiry time: {array[4]}
 """)
 
+    elif array[5]:
         await update.message.reply_text(f"""
 email: {array[0]}
 id: {array[5]}
@@ -65,8 +66,7 @@ traffic sum: {array[3]} GB
 expiry time: {array[4]}
 """)
     
-    elif type(array) != list:
-        await update.message.reply_text(f" وجود ندارد Email: {email}")
+    await update.message.reply_text(f" وجود ندارد Email: {email}")
 
 
 if __name__ == "__main__":
