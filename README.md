@@ -12,4 +12,6 @@ Since the Project is currently not in any position to be production ready i have
 # Running the project
 The project can be run using `nohup` until a docker file is added for proper application hosting and building on linux servers and hosts.
 
-`nohup python3 main.py &`
+`nohup python3 main.py > /dev/null 2>&1 & echo $! > run.pid`
+
+in case the need arises to kill the current running proccess access the pid.log file and execute `kill -9 $(cat run.pid)`
