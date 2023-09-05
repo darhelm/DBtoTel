@@ -6,7 +6,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 from dotenv import dotenv_values
 
 
-from read_db import findEmail, findId
+from read_db import findEmail, findId, findConfig
 
 
 # Load the secrets to a variable as a dictionary "key, value pair"
@@ -59,6 +59,23 @@ expiry time: {array[4]}
 """)
     elif type(array) != list:
         await update.message.reply_text(f" وجود ندارد Email: {email}")
+
+async def config(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    config : str = context.args[0]
+    array = findConfig(config)
+
+    if type(array) == list:
+        await update.message.reply_text(f"""
+email: {array[0]}
+id: {array[5]}
+download: {array[1]} GB
+upload: {array[2]} GB
+traffic sum: {array[3]} GB
+expiry time: {array[4]}
+""")
+    
+    else:
+        await update.message.reply_text(f" وجود ندارد Config: {config}")
 
 
 if __name__ == "__main__":
