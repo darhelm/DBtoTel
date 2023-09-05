@@ -86,6 +86,7 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("help", help))
     app.add_handler(CommandHandler("id", id))
     app.add_handler(CommandHandler("email", email))
+    app.add_handler(CommandHandler("config", config))
 
     # Poll the bot
     app.run_polling()
