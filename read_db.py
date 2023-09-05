@@ -3,13 +3,15 @@ import pandas as pd
 import datetime
 import json
 from dotenv import dotenv_values
+from re import search
 
 SECRET = dotenv_values(".env")
 
 # If you have more than one data base to check add their PATH variables here
 # add '/etc/x-ui/x-ui.db' for linux make sure it is in string format
+# add your path variables as raw string in case you are using linux
 
-PATHS = ['x-ui.db', 'x-ui-chess.db'] 
+PATHS = [r'x-ui.db', r'x-ui-chess.db'] 
 
 def findEmail(email, id=None):
 
@@ -83,27 +85,42 @@ def findId(id):
                         return findEmail(email, id)
             except KeyError:
                 break
-        
+
+
+def findConfig(config:str) -> list:
+    s = search(r'[^vless://][^vmess://][^trojan://].*(?=@)', config)
+    id = config[s.start():s.end()]
+    return findId(id)
+
+   
 # Simple promp test
 
-# options = ["id", "email"]
-# choice = input(f"would you like to select with {options[0]} or {options[1]} : ")
+options = ["id", "email", "config"]
+choice = input(f"would you like to select with {options[0]} or {options[1]} or {options[2]} : ")
 
-# if choice not in options:
-#     print("your input was not recognized")
+if choice not in options:
+    print("your input was not recognized")
 
-# elif choice == "id":
+elif choice == "id":
 
-#     id = input("enter your id : ").__str__()
-#     if type(findId(id)) != list:
-#         print(f"the id,{id} did not exist or was not entered correctly!")
+    id = input("enter your id : ").__str__()
+    if type(findId(id)) != list:
+        print(f"the id,{id} did not exist or was not entered correctly!")
 
-#     print(findId(id))
+    print(findId(id))
 
-# elif choice == "email":
+elif choice == "email":
 
-#     email = input("enter your email : ").__str__()
-#     if type(findEmail(email)) != list:
-#         print("the email did not exist or was not entered correctly!")
+    email = input("enter your email : ").__str__()
+    if type(findEmail(email)) != list:
+        print("the email did not exist or was not entered correctly!")
 
-#     print(findEmail(email))
+    print(findEmail(email))
+
+elif choice == "config":
+
+    config = input("enter your config : ").__str__()
+    if type(findConfig(config)) != list:
+        print("the config did not exist or was not entered correctly!")
+
+    print(findConfig(config))
