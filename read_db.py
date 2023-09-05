@@ -95,32 +95,32 @@ def findConfig(config:str) -> list:
    
 # Simple promp test
 
-options = ["id", "email", "config"]
-choice = input(f"would you like to select with {options[0]} or {options[1]} or {options[2]} : ")
+# options = ["id", "email", "config"]
+# choice = input(f"would you like to select with {options[0]} or {options[1]} or {options[2]} : ")
 
-if choice not in options:
-    print("your input was not recognized")
+# if choice not in options:
+#     print("your input was not recognized")
 
-elif choice == "id":
+# elif choice == "id":
 
-    id = input("enter your id : ").__str__()
-    if type(findId(id)) != list:
-        print(f"the id,{id} did not exist or was not entered correctly!")
+#     id = input("enter your id : ").__str__()
+#     if type(findId(id)) != list:
+#         print(f"the id,{id} did not exist or was not entered correctly!")
 
-    print(findId(id))
+#     print(findId(id))
 
-elif choice == "email":
+# elif choice == "email":
 
-    email = input("enter your email : ").__str__()
-    if type(findEmail(email)) != list:
-        print("the email did not exist or was not entered correctly!")
+#     email = input("enter your email : ").__str__()
+#     if type(findEmail(email)) != list:
+#         print("the email did not exist or was not entered correctly!")
 
-    print(findEmail(email))
+#     print(findEmail(email))
 
-elif choice == "config":
+# elif choice == "config":
 
-    config = input("enter your config : ").__str__()
-    if type(findConfig(config)) != list:
-        print("the config did not exist or was not entered correctly!")
+#     config = input("enter your config : ").__str__()
+#     if type(findConfig(config)) != list:
+#         print("the config did not exist or was not entered correctly!")
 
-    print(findConfig(config))
+#     print(findConfig(config))
